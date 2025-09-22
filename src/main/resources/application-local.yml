@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:33006/todo_app_local?createDatabaseIfNotExist=true&connectTimeout=5000&socketTimeout=10000&autoReconnect=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+server:
+  port: 8090
+  servlet:
+    context-path: /todo
