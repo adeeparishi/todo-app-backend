@@ -98,6 +98,7 @@ public class TaskServiceImpl implements TaskService {
                 .createdAt(t.getCreatedAt())
                 .userId(t.getUser().getId())
                 .priority(t.getPriority())
+                .completed(t.getStatus().equals(Enum.Status.COMPLETED))
                 .build();
     }
 
@@ -111,6 +112,16 @@ public class TaskServiceImpl implements TaskService {
         Task task = taskRepo.findByIdAndUserId(taskId, userId, Enum.Status.DELETED.name())
                 .orElseThrow(() -> new NotFoundException("Task not found!"));
         task.setStatus(status);
+        return toResponse(
+                taskRepo.save(task)
+        );
+    }
+
+    @Override
+    public TaskResponse deleteTask(Long taskId, Long userId) {
+        Task task = taskRepo.findByIdAndUserId(taskId, userId)
+                .orElseThrow(() -> new NotFoundException("Task not found!"));
+        task.setStatus(Enum.Status.DELETED);
         return toResponse(
                 taskRepo.save(task)
         );

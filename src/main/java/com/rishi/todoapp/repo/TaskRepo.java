@@ -52,4 +52,9 @@ public interface TaskRepo extends JpaRepository<Task, Long> {
             SELECT * FROM task WHERE id = :taskId AND status <> :status AND user = :userId
             """, nativeQuery = true)
     Optional<Task> findByIdAndUserId(@Param("taskId") Long taskId, @Param("userId") Long userId, @Param("status") String status);
+
+    @Query(value = """
+            SELECT * FROM task WHERE id = :taskId AND user = :userId
+            """, nativeQuery = true)
+    Optional<Task> findByIdAndUserId(@Param("taskId") Long taskId, @Param("userId") Long userId);
 }

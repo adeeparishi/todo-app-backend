@@ -49,4 +49,14 @@ public class TaskController {
         );
     }
 
+    @DeleteMapping("/delete/{taskId}")
+    public ResponseEntity<GenericResponse<TaskResponse>> deleteTask(@PathVariable("taskId") Long taskId,
+                                                                    @RequestParam(value = "userId") Long userId) {
+        return ResponseEntity.ok(
+                GenericResponse.success(
+                        taskService.deleteTask(taskId, userId)
+                )
+        );
+    }
+
 }

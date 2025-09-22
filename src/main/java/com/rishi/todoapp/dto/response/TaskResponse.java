@@ -21,5 +21,5 @@ public class TaskResponse {
     private LocalDateTime createdAt;
     private Enum.Priority priority;
     private Long userId;
-
+    private boolean completed;
 }

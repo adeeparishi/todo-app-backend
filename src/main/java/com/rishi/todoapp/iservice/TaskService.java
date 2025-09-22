@@ -16,4 +16,5 @@ public interface TaskService {
 
     TaskResponse updateTaskStatus(Long taskId, Long userid, Enum.Status status);
 
+    TaskResponse deleteTask(Long taskId, Long userId);
 }
