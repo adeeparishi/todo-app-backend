@@ -9,6 +9,6 @@ FROM eclipse-temurin:21-jdk-alpine
 WORKDIR /todo_be
 LABEL authors="Deeparishi"
 RUN apk add --no-cache curl
-COPY --from=builder /todo/target/*.jar todo.jar
+COPY --from=builder /todo_be/target/*.jar todo.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "todo.jar"]
