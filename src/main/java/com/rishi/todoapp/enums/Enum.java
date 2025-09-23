@@ -7,6 +7,7 @@ public class Enum {
     }
 
     public enum Status {
-        DELETED, COMPLETED, PENDING, BANNED, INACTIVE, ACTIVE
+        DELETED, COMPLETED, PENDING,
+        BANNED, INACTIVE, ACTIVE
     }
 }

@@ -33,4 +33,7 @@ public class Task {
 
     @Enumerated(EnumType.STRING)
     private Enum.Status status;
+
+    private LocalDateTime completedOn;
+    private LocalDateTime updatedAt;
 }

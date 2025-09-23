@@ -39,7 +39,7 @@ public class TaskServiceImpl implements TaskService {
         );
 
         existingTask.ifPresent(t -> {
-            throw new AlreadyExistException("Task Collision!");
+            throw new AlreadyExistException("Time Slot was already filled with given date time, Please chose other slot!");
         });
 
         User user = userService.findById(taskRequest.getUserId());
@@ -99,6 +99,8 @@ public class TaskServiceImpl implements TaskService {
                 .userId(t.getUser().getId())
                 .priority(t.getPriority())
                 .completed(t.getStatus().equals(Enum.Status.COMPLETED))
+                .updatedAt(t.getUpdatedAt())
+                .completedOn(t.getCompletedOn())
                 .build();
     }
 
@@ -112,6 +114,8 @@ public class TaskServiceImpl implements TaskService {
         Task task = taskRepo.findByIdAndUserId(taskId, userId, Enum.Status.DELETED.name())
                 .orElseThrow(() -> new NotFoundException("Task not found!"));
         task.setStatus(status);
+        if (status.equals(Enum.Status.COMPLETED))
+            task.setCompletedOn(LocalDateTime.now());
         return toResponse(
                 taskRepo.save(task)
         );
@@ -122,6 +126,7 @@ public class TaskServiceImpl implements TaskService {
         Task task = taskRepo.findByIdAndUserId(taskId, userId)
                 .orElseThrow(() -> new NotFoundException("Task not found!"));
         task.setStatus(Enum.Status.DELETED);
+        task.setUpdatedAt(LocalDateTime.now());
         return toResponse(
                 taskRepo.save(task)
         );

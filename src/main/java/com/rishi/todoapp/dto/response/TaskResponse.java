@@ -19,6 +19,8 @@ public class TaskResponse {
     private String description;
     private LocalDateTime dueDate;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private LocalDateTime completedOn;
     private Enum.Priority priority;
     private Long userId;
     private boolean completed;
